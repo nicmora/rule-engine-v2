@@ -1,0 +1,34 @@
+server:
+  port: ${PORT}
+  servlet:
+    context-path: /ruleengine
+
+spring:
+  application:
+    name: ruleengine
+
+  devtools:
+    add-properties: false
+  
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  datasource:
+    url: ${RULEENGINE_DATASOURCE_URL}
+    username: ${RULEENGINE_DATASOURCE_USERNAME}
+    password: ${RULEENGINE_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    schemas: eunienginecope
+    default-schema: eunienginecope
+
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: false
