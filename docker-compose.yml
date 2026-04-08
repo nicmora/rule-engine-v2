@@ -1,29 +1,26 @@
 services:
 
-  db:
-    container_name: ruleengine-db
-    image: postgres:16.6-alpine
-    restart: always
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: ruleengine-app
+    mem_limit: 512m
+    mem_reservation: 256m
     ports:
-      - '5432:5432'
-    volumes:
-      - db:/data/db
-    networks:
-      - net
+      - "8080:8080"
     environment:
-      - POSTGRES_DB=ruleenginedb
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U user -d ruleenginedb" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-volumes:
-  db:
+      SPRING_PROFILES_ACTIVE: local
+      RULEENGINE_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres?currentSchema=ruleengine
+    networks:
+      - local_network
 
 networks:
-  net:
-    name: ruleengine-net
-    driver: bridge
+  local_network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: ${M2_HOME}/settings.xml

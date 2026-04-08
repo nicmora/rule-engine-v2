@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Entity
-@Table(name = "rules", schema = "eunienginecope")
+@Table(name = "rules", schema = "ruleengine")
 @Data
 @Builder
 @NoArgsConstructor

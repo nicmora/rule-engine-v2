@@ -1,4 +1,4 @@
-package dev.nicmora.ruleengine.util;
+package dev.nicmora.ruleengine.infrastructure.util;
 
 import java.util.HashMap;
 import java.util.Map;

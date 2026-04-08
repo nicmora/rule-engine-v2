@@ -12,4 +12,3 @@ CREATE TABLE IF NOT EXISTS ruleengine.rules (
     result_type VARCHAR(50),
     enabled BOOLEAN
 );
-
